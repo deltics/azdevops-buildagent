@@ -51,7 +51,6 @@ RUN curl -o packages-microsoft-prod.deb -L https://packages.microsoft.com/config
 RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-transport-https \
     dotnet-sdk-$DOTNET_VERSION
-ENV DotNet=${DOTNET_VERSION}
 
 # Add dotnet tools to path
 ENV PATH=$PATH:~/.dotnet/tools
