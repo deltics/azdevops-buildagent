@@ -8,6 +8,7 @@ LABEL version="1.0"
 # Software versions installed
 ENV DOCKER_VERSION=20.10.8
 ENV DOTNET_VERSION=5.0
+ENV GCC_VERSION=11
 ENV GITVERSIONTOOL_VERSION=5.6.6
 ENV GO_VERSION=1.16.7
 ENV HELM_VERSION=3.6.3
@@ -24,6 +25,8 @@ ENV DotNetCore=${DOTNET_VERSION}
 ENV DotNetCoreSdk=${DOTNET_VERSION}
 ENV DotNetFramework=${DOTNET_VERSION}
 ENV DotNetFrameworkSdk=${DOTNET_VERSION}
+ENV Gcc=${GCC_VERSION}
+ENV GnuC=${GCC_VERSION}
 ENV GitVersion=${GITVERSIONTOOL_VERSION}
 ENV Go=${GO_VERSION}
 ENV GoLang=${GO_VERSION}
@@ -106,3 +109,10 @@ RUN curl -o maven.tar.gz -LO https://apache.inspire.net.nz/maven/maven-3/${MAVEN
      && mv apache-maven-${MAVEN_VERSION} /usr/local/maven/${MAVEN_VERSION} \
      && rm maven.tar.gz
 ENV PATH=$PATH:/usr/local/maven/${MAVEN_VERSION}/bin
+
+
+# Install gcc (and rename gcc-11 as gcc)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc-$GCC_VERSION
+RUN mv /usr/bin/gcc-11 /usr/bin/gcc
+RUN gcc --version
