@@ -8,6 +8,7 @@ The build agent in these containers is of limited use since the image includes o
 * Git 2.30.2
 * NVM 0.38
 * Node 16.6.2
+* Azure Cli
 
 Tagged images are provided for the following versions of the build agent:
 
@@ -29,8 +30,9 @@ For additional information on more fully equipped agent images, refer to the doc
 
 | Tag | Short Tag | Overview |
 | --- | --------- | -------- |
-| [*&lt;agent-version&gt;*-docker20.10.8-dotnet5.0-gitversion5.6.6-go1.16.7-helm3.6.3-jfrog2-jdk11-maven3.8.2](README-wakatipu.md) | [&lt;agent-version&gt;-wakatipu](README-wakatipu.md) | Comprehensive tooling for building GoLang microservices in an enterprise context |
+| [*&lt;agent-version&gt;*-docker20.10.8-dotnet5.0-gitversion5.6.6-go1.16.7-helm3.6.3-jdk11-jfrog2-maven3.8.2](README-wakatipu.md) | [&lt;agent-version&gt;-wakatipu](README-wakatipu.md) | Comprehensive tooling for building GoLang microservices in an enterprise context |
 
+_NOTE: The links to documentation for the above image(s) are only functional when viewing this [README in the original source repo on GitHub](https://github.com/deltics/azdevops-buildagent/blob/master/README.md)_.
 
 ## Installation
 
@@ -58,7 +60,7 @@ Refer to the documentation of alternate tagged images, as listed above, for deta
 
 ## Execution
 
-The image executes the build agent at startup, registering with an Azdure DevOps Collection Agent Pool.  The agent unregisters at shutdown.
+The image executes the build agent at startup, registering with an Azure DevOps Collection Agent Pool.  The agent unregisters at shutdown.
 
 As a result, information is required to be passed to the startup script for the build agent hosted inside the container.  This information is passed via environment variables on the command line as follows:
 

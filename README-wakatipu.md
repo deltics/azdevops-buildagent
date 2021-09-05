@@ -8,6 +8,7 @@ On top of the base layer, this layer adds:
 
 * Docker 20.10.8 (binaries)
 * DotNet SDK 5.0
+* GCC 11
 * GitVersion 5.6.6
 * GoLang 1.16.7
 * Helm 3.6.3
@@ -42,6 +43,7 @@ Agent **Capabilities** are published using any environment variables defined at 
 | ---------- | ------- |
 | Docker     | - |
 | DotNet     | DotNetSdk, DotNetCore, DotNetCoreSdk, DotNetFramework, DotNetFrameworkSdk |
+| Gcc        | GnuC |
 | GitVersion | - |
 | Go         | GoLang |
 | Helm       | - |
