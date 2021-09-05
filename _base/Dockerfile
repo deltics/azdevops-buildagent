@@ -36,6 +36,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libunwind8 \
     netcat \
     libssl1.1 \
+    libssh-4 \
   && rm -rf /var/lib/apt/lists/*
 
 
