@@ -1,5 +1,13 @@
 FROM ubuntu:21.04
 
+# Metadata
+LABEL author="Jolyon Direnko-Smith"
+LABEL description="An Ubuntu 21.04 image providing a base for self-hosted Azure DevOps build agents."
+LABEL version="1.0"
+
+# Set shell for RUN commands
+SHELL ["/bin/bash", "--login", "-c"]
+
 # Versions of software introduced in this image
 ENV GIT_VERSION=2.30.2
 ENV NVM_VERSION=0.38.0
@@ -12,13 +20,6 @@ ENV NodeJS=$Node
 ENV Nvm=$NVM_VERSION
 ENV NodeVersionManager=$Nvm
 
-# Metadata
-LABEL author="Jolyon Direnko-Smith"
-LABEL description="An Ubuntu 21.04 image providing a base for self-hosted Azure DevOps build agents."
-LABEL version=$AGENT_VERSION
-
-# Set shell for RUN commands
-SHELL ["/bin/bash", "--login", "-c"]
 
 # To make it easier for build and release pipelines to run apt-get,
 # configure apt to not require confirmation (assume the -y argument by default)
