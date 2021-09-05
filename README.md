@@ -34,6 +34,7 @@ For additional information on more fully equipped agent images, refer to the doc
 
 _NOTE: The links to documentation for the above image(s) are only functional when viewing this [README in the original source repo on GitHub](https://github.com/deltics/azdevops-buildagent/blob/master/README.md)_.
 
+
 ## Installation
 
 Pull the image from Docker hub using either the full or short tag if provided, as required.

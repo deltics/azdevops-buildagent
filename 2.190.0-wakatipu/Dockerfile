@@ -116,4 +116,3 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc-$GCC_VERSION
 RUN mv /usr/bin/gcc-11 /usr/bin/gcc
 RUN gcc --version
-
