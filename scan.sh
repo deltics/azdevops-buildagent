@@ -4,4 +4,5 @@
 #  will be identified as such, if present.
 
 docker scan deltics/azdevops-buildagent:2.170.1-wakatipu
+docker scan deltics/azdevops-buildagent:2.181.2-wakatipu
 docker scan deltics/azdevops-buildagent:2.190.0-wakatipu

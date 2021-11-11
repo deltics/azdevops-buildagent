@@ -14,7 +14,7 @@ On top of the base layer, this layer adds:
 * Helm 3.6.3
 * JDK 11.0.12.7.1 (Amazon Corretto)
 * JFrog Cli v2
-* Maven 3.8.2
+* Maven 3.8.3
 
 
 ## Intended Use

@@ -1,5 +1,5 @@
 
-FROM deltics/azdevops-buildagent:2.190.0
+FROM deltics/azdevops-buildagent:2.181.2
 
 LABEL author="Jolyon Direnko-Smith"
 LABEL description="Adds Docker binaries, dotnet sdk, GitVersion, GoLang, Helm, JDK, JFrog Cli, Maven"
@@ -85,13 +85,6 @@ RUN curl -o helm.tar.gz -LsS https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd
     && rm helm.tar.gz
 
 
-# Install JFrog Cli
-RUN JFROGDIR=${Agent_ToolsDirectory}/_jfrog/current; \
-     mkdir -p $JFROGDIR; \
-     curl -fLsS https://getcli.jfrog.io | bash -s v2; \
-     mv jfrog $JFROGDIR
-
-
 # Install JDK
 RUN curl -o jdk.tar.gz -LO https://corretto.aws/downloads/resources/${JDK_VERSION}/amazon-corretto-${JDK_VERSION}-linux-x64.tar.gz \ 
      && tar -zxvf jdk.tar.gz \
@@ -100,6 +93,13 @@ RUN curl -o jdk.tar.gz -LO https://corretto.aws/downloads/resources/${JDK_VERSIO
      && mv jdk /usr/local/bin/jdk/11.0.12.7.1 \
      && rm jdk.tar.gz
 ENV JAVA_HOME=/usr/local/bin/jdk/11.0.12.7.1
+
+
+# Install JFrog Cli
+RUN JFROGDIR=${Agent_ToolsDirectory}/_jfrog/current; \
+     mkdir -p $JFROGDIR; \
+     curl -fLsS https://getcli.jfrog.io | bash -s v2; \
+     mv jfrog $JFROGDIR
 
 
 # Install Maven
@@ -111,8 +111,8 @@ RUN curl -o maven.tar.gz -LO https://archive.apache.org/dist/maven/maven-3/${MAV
 ENV PATH=$PATH:/usr/local/maven/${MAVEN_VERSION}/bin
 
 
-# Install gcc (and rename gcc-11 as gcc)
+# Install gcc and header files (NOTE: renaming gcc-11 hardlink as gcc)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc-$GCC_VERSION
+    gcc-$GCC_VERSION \
+    libc6-dev
 RUN mv /usr/bin/gcc-11 /usr/bin/gcc
-RUN gcc --version
