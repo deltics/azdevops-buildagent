@@ -11,7 +11,7 @@ SHELL ["/bin/bash", "--login", "-c"]
 # Versions of software introduced in this image
 ENV GIT_VERSION=2.30.2
 ENV NVM_VERSION=0.38.0
-ENV NODE_VERSION=16.6.2
+ENV NODE_VERSION=16.11.1
 
 # Environment variables (and aliases/synonyms) that identify Agent capabilities
 ENV Git=$GIT_VERSION

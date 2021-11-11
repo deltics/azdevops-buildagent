@@ -7,12 +7,13 @@ The build agent in these containers is of limited use since the image includes o
 * Ubuntu 21.04 (base image)
 * Git 2.30.2
 * NVM 0.38
-* Node 16.6.2
+* Node 16.11.1
 * Azure Cli
 
 Tagged images are provided for the following versions of the build agent:
 
 * 2.170.1
+* 2.181.2
 * 2.190.0 (latest)
 
 The image tag corresponds to the agent version, so the full identifier for the 2.190.0 image is:
@@ -30,7 +31,7 @@ For additional information on more fully equipped agent images, refer to the doc
 
 | Tag | Short Tag | Overview |
 | --- | --------- | -------- |
-| [*&lt;agent-version&gt;*-docker20.10.8-dotnet5.0-gitversion5.6.6-go1.16.7-helm3.6.3-jdk11-jfrog2-maven3.8.2](README-wakatipu.md) | [&lt;agent-version&gt;-wakatipu](README-wakatipu.md) | Comprehensive tooling for building GoLang microservices in an enterprise context |
+| [*&lt;agent-version&gt;*-docker20.10.8-dotnet5.0-gitversion5.6.6-go1.16.7-helm3.6.3-jdk11-jfrog2-maven3.8.3](README-wakatipu.md) | [&lt;agent-version&gt;-wakatipu](README-wakatipu.md) | Comprehensive tooling for building GoLang microservices in an enterprise context |
 
 _NOTE: The links to documentation for the above image(s) are only functional when viewing this [README in the original source repo on GitHub](https://github.com/deltics/azdevops-buildagent/blob/master/README.md)_.
 

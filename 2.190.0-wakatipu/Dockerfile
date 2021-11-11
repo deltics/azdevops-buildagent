@@ -15,7 +15,7 @@ ENV HELM_VERSION=3.6.3
 ENV JFROGCLI_VERSION=2
 ENV JDK_VERSION=11.0.12.7.1
 ENV JRE_VERSION=${JDK_VERSION}
-ENV MAVEN_VERSION=3.8.2
+ENV MAVEN_VERSION=3.8.3
 
 # Agent capabilities (and aliases)
 ENV Docker=${DOCKER_VERSION}
@@ -103,7 +103,7 @@ ENV JAVA_HOME=/usr/local/bin/jdk/11.0.12.7.1
 
 
 # Install Maven
-RUN curl -o maven.tar.gz -LO https://apache.inspire.net.nz/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+RUN curl -o maven.tar.gz -LO https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
      && tar -zxvf maven.tar.gz \
      && mkdir /usr/local/maven \
      && mv apache-maven-${MAVEN_VERSION} /usr/local/maven/${MAVEN_VERSION} \
