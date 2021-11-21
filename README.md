@@ -2,38 +2,45 @@
 
 A containerised, Linux-hosted build agent for Azure DevOps.
 
-The build agent in these containers is of limited use since the image includes only a minimal runtime environment for the agent itself, including:
+The build agent in these images is of limited use since the image includes only a minimal runtime environment for the agent itself, including:
 
-* Ubuntu 21.04 (base image)
-* Git 2.30.2
-* NVM 0.38
-* Node 16.11.1
-* Azure Cli
+| Component | Version |
+| -- | -- |
+| git | 2.32.0 |
+| nvm | 0.38.0 |
+| node | 16.11.1 |
+| Azure Cli | |
 
 Tagged images are provided for the following versions of the build agent:
 
 * 2.170.1
 * 2.181.2
-* 2.190.0 (latest)
+* 2.190.0
 
 The image tag corresponds to the agent version, so the full identifier for the 2.190.0 image is:
 
 `deltics/azdevops-buildagent:2.190.0`
 
-Multiple agent versions are provided so that auto-downgrade behaviour may be avoided by using images based on an appropriate build agent version, if that is an issue in your environment.
+Multiple agent versions are provided so that auto-downgrade (or upgrade) behaviour may be avoided by using images based on an appropriate build agent version, if that is an issue in your environment.
 
 
 ## Intended Use
 
-Although the image may be used to deploy a functioning build agent, the pipelines it could usefully run would be very limited.  The intended use is for these images to be used as base images, adding additional tools to support more useful pipelines.
+Although the image may be used to deploy a functioning build agent, the pipelines it could usefully run would be very limited due to the absence of tooling beyond git, node and nvm.
+
+The intended use is for these images to be used as the _base_ for further images, adding additional tools to support more useful pipelines.
+
+## More Equipped Images
+
+In addition to the agent images provided to use as the basis for your custom agent tooling, some ready-to-use images are provided with selected tooling already installed.
 
 For additional information on more fully equipped agent images, refer to the documentation for those as follows:
 
 | Tag | Short Tag | Overview |
 | --- | --------- | -------- |
-| [*&lt;agent-version&gt;*-docker20.10.8-dotnet5.0-gitversion5.6.6-go1.16.7-helm3.6.3-jdk11-jfrog2-maven3.8.3](README-wakatipu.md) | [&lt;agent-version&gt;-wakatipu](README-wakatipu.md) | Comprehensive tooling for building GoLang microservices in an enterprise context |
+| [*&lt;agent-version&gt;*-wakatipu](README-wakatipu.md) | Comprehensive tooling (everything _and_ the kitchen sink) for building GoLang microservices in an enterprise context.<br/>"Wakatipu" is the largest lake in the Ota**GO** region of New Zealand.<br/>See readme for details of versions of tools installed.|
 
-_NOTE: The links to documentation for the above image(s) are only functional when viewing this [README in the original source repo on GitHub](https://github.com/deltics/azdevops-buildagent/blob/master/README.md)_.
+_NOTE: The links to documentation for the above image(s) are only functional when viewing this [README in the original source repo on GitHub](https://github.com/deltics/azdevops-buildagent)_.
 
 
 ## Installation
@@ -69,7 +76,7 @@ As a result, information is required to be passed to the startup script for the 
 | Variable   | Required | Description |
 | ---------- | --- | --- |
 | AZP_URL    | Y | The base url for the collection hosting the pool in which the agent should register at startup |
-| AZP_TOKEN  | Y| A PAT with "Agent Pools: Read & Manage" scope
+| AZP_TOKEN  | Y | A PAT with "Agent Pools: Read & Manage" scope
 | AZP_POOL   | N | The name of the agent pool in which the agent should register at startup.  If this is not specified then "Default" is assumed
 
 Refer to the documentation of alternate tagged images, as listed above, for details of additional execution requirements they may introduce.

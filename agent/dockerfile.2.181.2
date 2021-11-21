@@ -1,4 +1,4 @@
-FROM deltics/azdevops-buildagent:base
+FROM deltics/azdevops-buildagent:os
 ARG TARGETARCH=amd64
 
 # Set shell for RUN commands
@@ -6,7 +6,7 @@ SHELL ["/bin/bash", "--login", "-c"]
 
 
 # Versions of software introduced in this image
-ENV AGENT_VERSION=2.190.0
+ENV AGENT_VERSION=2.181.2
 
 
 # To make it easier for build and release pipelines to run apt-get,

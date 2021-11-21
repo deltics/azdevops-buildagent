@@ -6,15 +6,25 @@ Short tag: `Wakatipu`, named for the largest lake in the Ota**go** region of New
 
 On top of the base layer, this layer adds:
 
-* Docker 20.10.8 (binaries)
-* DotNet SDK 5.0
-* GCC 11
-* GitVersion 5.6.6
-* GoLang 1.16.7
-* Helm 3.6.3
-* JDK 11.0.12.7.1 (Amazon Corretto)
-* JFrog Cli v2
-* Maven 3.8.3
+| Component | Version | Notes |
+| -- | -- | -- |
+| Docker | 20.10.8 |
+| DotNet | 5.0 |
+| gcc | 11 |
+| GitVersion | 5.8.1 |
+| GoLang | 1.17.3 |
+| GoSwagger | 0.28.0 |
+| Helm | 3.6.3 |
+| JDK | 11.0.12.7.1 |
+| JFrog | 2 |
+| kubectl | 1.22.4 |
+| Maven | 3.8.3 |
+
+Additional GoLang Utilities
+| Utility | Version |
+| -- | -- |
+| gocover-cobertura| - | (not versioned) |
+| go-junit-report | 0.9.1 |
 
 
 ## Intended Use
@@ -39,17 +49,19 @@ Pull the image from Docker hub.  Simples.
 
 Agent **Capabilities** are published using any environment variables defined at startup.  In addition to capabilities inherited from the base agent image, this layer defines further environment variables for:
 
-| Capability | Aliases |
-| ---------- | ------- |
-| Docker     | - |
-| DotNet     | DotNetSdk, DotNetCore, DotNetCoreSdk, DotNetFramework, DotNetFrameworkSdk |
-| Gcc        | GnuC |
-| GitVersion | - |
-| Go         | GoLang |
-| Helm       | - |
-| Java       | JavaRuntimeEnvironment, Jdk, Jre |
-| JFrogCli   | - |
-| Maven      | Mvn |
+| Capability  | Aliases |
+| ----------- | ------- |
+| Docker      | - |
+| DotNet      | DotNetSdk, DotNetCore, DotNetCoreSdk, DotNetFramework, DotNetFrameworkSdk |
+| Gcc         | GnuC |
+| GoSwagger   | - |
+| GitVersion  | - |
+| Go          | GoLang |
+| Helm        | - |
+| Java        | JavaRuntimeEnvironment, Jdk, Jre |
+| JFrogCli    | - |
+| KubeCtl     | - |
+| Maven       | Mvn |
 
 
 Consistent with the convention in the base agent layer, the value for each identifies the version of the particular software so that a pipeline may express **Demands** in terms of availability of the software in general, or a specific version where necessary.

@@ -1,23 +1,29 @@
+FROM deltics/azdevops-buildagent:os
 
-FROM deltics/azdevops-buildagent:2.190.0
-
+# Metadata
 LABEL author="Jolyon Direnko-Smith"
-LABEL description="Adds Docker binaries, dotnet sdk, GitVersion, GoLang, Helm, JDK, JFrog Cli, Maven"
-LABEL version="1.0"
+LABEL description="Adds tooling for building golang microservices in an enterprise environment."
 
-# Software versions installed
+# Set shell for RUN commands
+SHELL ["/bin/bash", "--login", "-c"]
+
+# The versions of software to be installed
+
 ENV DOCKER_VERSION=20.10.8
 ENV DOTNET_VERSION=5.0
 ENV GCC_VERSION=11
-ENV GITVERSIONTOOL_VERSION=5.6.6
-ENV GO_VERSION=1.16.7
+ENV GITVERSIONTOOL_VERSION=5.8.1
+ENV GO_VERSION=1.17.3
+ENV GOSWAGGER_VERSION=0.28.0
 ENV HELM_VERSION=3.6.3
 ENV JFROGCLI_VERSION=2
 ENV JDK_VERSION=11.0.12.7.1
 ENV JRE_VERSION=${JDK_VERSION}
+ENV KUBECTL_VERSION=1.22.4
 ENV MAVEN_VERSION=3.8.3
 
 # Agent capabilities (and aliases)
+
 ENV Docker=${DOCKER_VERSION}
 ENV DotNet=${DOTNET_VERSION}
 ENV DotNetSdk=${DOTNET_VERSION}
@@ -30,12 +36,14 @@ ENV GnuC=${GCC_VERSION}
 ENV GitVersion=${GITVERSIONTOOL_VERSION}
 ENV Go=${GO_VERSION}
 ENV GoLang=${GO_VERSION}
+ENV GoSwagger=${GOSWAGGER_VERSION}
 ENV Helm=${HELM_VERSION}
 ENV JFrogCli=${JFROGCLI_VERSION}
 ENV Java=${JRE_VERSION}
 ENV JavaRuntimeEnvironment=${JRE_VERSION}
 ENV Jdk=${JDK_VERSION}
 ENV Jre=${JRE_VERSION}
+ENV KubeCtl=${KUBECTL_VERSION}
 ENV Maven=${MAVEN_VERSION}
 ENV Mvn=${MAVEN_VERSION}
 
@@ -85,13 +93,6 @@ RUN curl -o helm.tar.gz -LsS https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd
     && rm helm.tar.gz
 
 
-# Install JFrog Cli
-RUN JFROGDIR=${Agent_ToolsDirectory}/_jfrog/current; \
-     mkdir -p $JFROGDIR; \
-     curl -fLsS https://getcli.jfrog.io | bash -s v2; \
-     mv jfrog $JFROGDIR
-
-
 # Install JDK
 RUN curl -o jdk.tar.gz -LO https://corretto.aws/downloads/resources/${JDK_VERSION}/amazon-corretto-${JDK_VERSION}-linux-x64.tar.gz \ 
      && tar -zxvf jdk.tar.gz \
@@ -100,6 +101,13 @@ RUN curl -o jdk.tar.gz -LO https://corretto.aws/downloads/resources/${JDK_VERSIO
      && mv jdk /usr/local/bin/jdk/11.0.12.7.1 \
      && rm jdk.tar.gz
 ENV JAVA_HOME=/usr/local/bin/jdk/11.0.12.7.1
+
+
+# Install JFrog Cli
+RUN JFROGDIR=${Agent_ToolsDirectory}/_jfrog/current; \
+     mkdir -p $JFROGDIR; \
+     curl -fLsS https://getcli.jfrog.io | bash -s v2; \
+     mv jfrog $JFROGDIR
 
 
 # Install Maven
@@ -111,8 +119,26 @@ RUN curl -o maven.tar.gz -LO https://archive.apache.org/dist/maven/maven-3/${MAV
 ENV PATH=$PATH:/usr/local/maven/${MAVEN_VERSION}/bin
 
 
-# Install gcc (and rename gcc-11 as gcc)
+# Install gcc and header files (NOTE: renaming gcc-11 hardlink as gcc)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc-$GCC_VERSION
+    gcc-$GCC_VERSION \
+    libc6-dev
 RUN mv /usr/bin/gcc-11 /usr/bin/gcc
-RUN gcc --version
+
+
+# Download go-swagger
+RUN download_url=https://github.com/go-swagger/go-swagger/releases/download/v$GOSWAGGER_VERSION/swagger_linux/amd64 \
+     && curl -k -o /usr/local/bin/swagger -L'#' "$download_url" \
+     && chmod +x /usr/local/bin/swagger
+
+
+# Install kubectl
+RUN curl -LO "https://dl.k8s.io/release/v$KUBECTL_VERSION/bin/linux/amd64/kubectl" \
+     && curl -LO "https://dl.k8s.io/v$KUBECTL_VERSION/bin/linux/amd64/kubectl.sha256" \
+     && echo "$(<kubectl.sha256) kubectl" | sha256sum --check \
+     && chmod +x kubectl \
+     && mv kubectl /usr/local/bin
+
+
+# Install additional tools
+COPY .tools /usr/local/bin

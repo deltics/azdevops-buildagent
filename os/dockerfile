@@ -1,15 +1,14 @@
-FROM ubuntu:21.04
+FROM ubuntu:21.10
 
 # Metadata
 LABEL author="Jolyon Direnko-Smith"
-LABEL description="An Ubuntu 21.04 image providing a base for self-hosted Azure DevOps build agents."
-LABEL version="1.0"
+LABEL description="An Ubuntu image providing a base for self-hosted Azure DevOps build agents."
 
 # Set shell for RUN commands
 SHELL ["/bin/bash", "--login", "-c"]
 
 # Versions of software introduced in this image
-ENV GIT_VERSION=2.30.2
+ENV GIT_VERSION=2.32.0
 ENV NVM_VERSION=0.38.0
 ENV NODE_VERSION=16.11.1
 
