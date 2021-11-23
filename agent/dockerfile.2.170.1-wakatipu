@@ -27,7 +27,8 @@ RUN if [ "$TARGETARCH" = "amd64" ]; then \
 COPY ./start.sh .
 RUN chmod +x start.sh
 
-RUN mkdir -p /azp/_work/_tool
+# Just to make absolutely sure that the Agent_ToolsDirectory is set correctly
+#  (the folder itself is created in the wakatipu base image)
 ENV Agent_ToolsDirectory=/azp/_work/_tool
 
 ENTRYPOINT [ "./start.sh" ]
