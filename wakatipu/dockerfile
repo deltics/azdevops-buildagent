@@ -48,6 +48,15 @@ ENV Maven=${MAVEN_VERSION}
 ENV Mvn=${MAVEN_VERSION}
 
 
+# Some tools (e.g. JFrog Cli) are expected to be found in a specific location in 
+#  the agent file system.
+#
+# The agent doesn't set this location up however, so we can do so here
+#  even though the agent has yet to be installed.
+RUN mkdir -p /azp/_work/_tool
+ENV Agent_ToolsDirectory=/azp/_work/_tool
+
+
 # To make it easier for build and release pipelines to run apt-get,
 # configure apt to not require confirmation (assume the -y argument by default)
 ENV DEBIAN_FRONTEND=noninteractive
@@ -142,3 +151,8 @@ RUN curl -LO "https://dl.k8s.io/release/v$KUBECTL_VERSION/bin/linux/amd64/kubect
 
 # Install additional tools
 COPY .tools /usr/local/bin
+
+
+# Install libxml2
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libxml2
