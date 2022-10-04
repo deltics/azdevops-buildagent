@@ -1,4 +1,4 @@
-FROM ubuntu:21.10
+FROM ubuntu:22.04
 
 # Metadata
 LABEL author="Jolyon Direnko-Smith"
@@ -8,8 +8,8 @@ LABEL description="An Ubuntu image providing a base for self-hosted Azure DevOps
 SHELL ["/bin/bash", "--login", "-c"]
 
 # Versions of software introduced in this image
-ENV GIT_VERSION=2.32.0
-ENV NVM_VERSION=0.38.0
+ENV GIT_VERSION=2.34.1
+ENV NVM_VERSION=0.39.1
 ENV NODE_VERSION=16.11.1
 
 # Environment variables (and aliases/synonyms) that identify Agent capabilities
@@ -29,13 +29,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
     jq \
-    git=1:$GIT_VERSION-1ubuntu1 \
+    git=1:$GIT_VERSION-1ubuntu1.4 \
     iputils-ping \
     libcurl4 \
-    libicu67 \
+    libicu70 \
     libunwind8 \
     netcat \
-    libssl1.1 \
+    libssl3 \
     libssh-4 \
   && rm -rf /var/lib/apt/lists/*
 

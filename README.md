@@ -6,8 +6,8 @@ The build agent in these images is of limited use since the image includes only 
 
 | Component | Version |
 | -- | -- |
-| git | 2.32.0 |
-| nvm | 0.38.0 |
+| git | 2.34.1 |
+| nvm | 0.39.1 |
 | node | 16.11.1 |
 | Azure Cli | |
 

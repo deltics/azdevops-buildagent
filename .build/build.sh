@@ -29,23 +29,23 @@ function doBuild() {
 }
 
 # Installed in the "os" layer
-_git=2.32.0
-_nvm=0.38.0
+_git=2.34.1
+_nvm=0.39.1
 _node=16.11.1
 
 # ENV defined in the "env" layer, but installed in n.nnn.n agent layers
-_docker=20.10.8
-_dotnet=5.0
+_docker=20.10.18
+_dotnet=6.0
 _gcc=11
-_gitversionTool=5.8.1
-_go=1.17.3
+_gitversionTool=5.10.3
+_go=1.19.1
 _gojunit=0.9.1
-_goswagger=0.28.0
-_helm=3.6.3
+_goswagger=0.30.3
+_helm=3.10.0
 _jfrogcli=2
 _jdk=11.0.12.7.1
-_kubectl=1.22.4
-_maven=3.8.3
+_kubectl=1.22.15
+_maven=3.8.6
 
 # Update dockerfile(s)
 setENV  os/dockerfile  GIT   $_git
