@@ -8,7 +8,7 @@ The build agent in these images is of limited use since the image includes only 
 | -- | -- |
 | git | 2.34.1 |
 | nvm | 0.39.1 |
-| node | 16.11.1 |
+| node | 16.17.1 |
 | Azure Cli | |
 
 Tagged images are provided for the following versions of the build agent:
