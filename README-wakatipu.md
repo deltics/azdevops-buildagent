@@ -8,17 +8,17 @@ On top of the base layer, this layer adds:
 
 | Component | Version | Notes |
 | -- | -- | -- |
-| Docker | 20.10.8 |
-| DotNet | 5.0 |
+| Docker | 20.10.18 |
+| DotNet | 6.0 |
 | gcc | 11 |
-| GitVersion | 5.8.1 |
-| GoLang | 1.17.3 |
-| GoSwagger | 0.28.0 |
-| Helm | 3.6.3 |
+| GitVersion | 5.10.3 |
+| GoLang | 1.19.1 |
+| GoSwagger | 0.30.3 |
+| Helm | 3.10.0 |
 | JDK | 11.0.12.7.1 |
 | JFrog | 2 |
-| kubectl | 1.22.4 |
-| Maven | 3.8.3 |
+| kubectl | 1.22.15 |
+| Maven | 3.8.6 |
 
 Additional GoLang Utilities
 | Utility | Version |
