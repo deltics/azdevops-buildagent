@@ -31,7 +31,7 @@ function doBuild() {
 # Installed in the "os" layer
 _git=2.34.1
 _nvm=0.39.1
-_node=16.11.1
+_node=16.17.1
 
 # ENV defined in the "env" layer, but installed in n.nnn.n agent layers
 _docker=20.10.18
