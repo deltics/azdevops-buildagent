@@ -9,18 +9,18 @@ SHELL ["/bin/bash", "--login", "-c"]
 
 # The versions of software to be installed
 
-ENV DOCKER_VERSION=20.10.18
+ENV DOCKER_VERSION=20.10.24
 ENV DOTNET_VERSION=6.0
 ENV GCC_VERSION=11
-ENV GITVERSIONTOOL_VERSION=5.10.3
-ENV GO_VERSION=1.19.1
-ENV GOSWAGGER_VERSION=0.30.3
-ENV HELM_VERSION=3.10.0
+ENV GITVERSIONTOOL_VERSION=5.12.0
+ENV GO_VERSION=1.20.4
+ENV GOSWAGGER_VERSION=0.30.4
+ENV HELM_VERSION=3.12.0
 ENV JFROGCLI_VERSION=2
 ENV JDK_VERSION=11.0.12.7.1
 ENV JRE_VERSION=${JDK_VERSION}
 ENV KUBECTL_VERSION=1.22.15
-ENV MAVEN_VERSION=3.8.6
+ENV MAVEN_VERSION=3.9.2
 
 # Agent capabilities (and aliases)
 
@@ -62,7 +62,7 @@ ENV Agent_ToolsDirectory=/azp/_work/_tool
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
 
-# Install dotnet 5.0
+# Install dotnet
 RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-transport-https \
     dotnet-sdk-$DOTNET_VERSION
@@ -151,3 +151,8 @@ COPY .tools /usr/local/bin
 # Install libxml2
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libxml2
+
+# Disable Globalization Support in .net core, otherwise the Azure 
+# DevOps Agent is unable to startup on Ubuntu 23.04
+# TODO: May be fixed with 3.x agent software?
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1

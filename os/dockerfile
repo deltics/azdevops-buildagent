@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:23.04
 
 # Metadata
 LABEL author="Jolyon Direnko-Smith"
@@ -8,9 +8,9 @@ LABEL description="An Ubuntu image providing a base for self-hosted Azure DevOps
 SHELL ["/bin/bash", "--login", "-c"]
 
 # Versions of software introduced in this image
-ENV GIT_VERSION=2.34.1
-ENV NVM_VERSION=0.39.1
-ENV NODE_VERSION=16.17.1
+ENV GIT_VERSION=2.39.2
+ENV NVM_VERSION=0.39.3
+ENV NODE_VERSION=16.20.0
 
 # Environment variables (and aliases/synonyms) that identify Agent capabilities
 ENV Git=$GIT_VERSION
@@ -29,15 +29,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
     jq \
-    git=1:$GIT_VERSION-1ubuntu1.4 \
+    git=1:$GIT_VERSION-1ubuntu1.1 \
     iputils-ping \
     libcurl4 \
-    libicu70 \
+    libicu72 \
     libunwind8 \
-    netcat \
+    netcat-traditional \
     libssl3 \
     libssh-4 \
   && rm -rf /var/lib/apt/lists/*
+
+
+# TODO: Workaround for devops agent not supporting OpenSSL 3.0
+# https://github.com/microsoft/azure-pipelines-agent/issues/3834#issuecomment-1160576447
+RUN curl -sL http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb > libssl1.1_1.1.0g-2ubuntu4_amd64.deb && \
+    DEBIAN_FRONTEND=noninteractive dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb && \
+    rm libssl1.1_1.1.0g-2ubuntu4_amd64.deb
+
+# https://github.com/microsoft/azure-pipelines-agent/issues/3834#issuecomment-1151874312
+RUN sed -i 's/openssl_conf = openssl_init/#openssl_conf = openssl_init/g' /etc/ssl/openssl.cnf
 
 
 # Install nvm (Node Version Manager)

@@ -29,23 +29,25 @@ function doBuild() {
 }
 
 # Installed in the "os" layer
-_git=2.34.1
-_nvm=0.39.1
-_node=16.17.1
+_git=2.39.2
+_nvm=0.39.3
+_node=16.20.0
 
 # ENV defined in the "env" layer, but installed in n.nnn.n agent layers
-_docker=20.10.18
+_docker=20.10.24
 _dotnet=6.0
 _gcc=11
-_gitversionTool=5.10.3
-_go=1.19.1
-_gojunit=0.9.1
-_goswagger=0.30.3
-_helm=3.10.0
+_gitversionTool=5.12.0
+_go=1.20.4
+_goswagger=0.30.4
+_helm=3.12.0
 _jfrogcli=2
 _jdk=11.0.12.7.1
 _kubectl=1.22.15
-_maven=3.8.6
+_maven=3.9.2
+
+# for information only, binary is copied from wakatipu/.tools
+_gojunit=2.0.0
 
 # Update dockerfile(s)
 setENV  os/dockerfile  GIT   $_git
@@ -90,13 +92,15 @@ doBuild wakatipu
 
 # Build agent images
 
-#  These images are built for bare agents (no tooling) which may be used as the base
-#  for more specific agent images.
+# These images are built for bare agents (no tooling) which may be used as the base
+# for more specific agent images.
+# (based on "os")
 doBuild agent 2.170.1
 doBuild agent 2.181.2
 doBuild agent 2.190.0
 
-#  These images add specific versions of the agent to the wakatipu tooling.
+# These images add specific versions of the agent to the wakatipu tooling.
+# (based on "wakatipu")
 doBuild agent 2.170.1-wakatipu
 doBuild agent 2.181.2-wakatipu
 doBuild agent 2.190.0-wakatipu

@@ -6,9 +6,9 @@ The build agent in these images is of limited use since the image includes only 
 
 | Component | Version |
 | -- | -- |
-| git | 2.34.1 |
-| nvm | 0.39.1 |
-| node | 16.17.1 |
+| git | 2.39.2 |
+| nvm | 0.39.3 |
+| node | 16.20.0 |
 | Azure Cli | |
 
 Tagged images are provided for the following versions of the build agent:
