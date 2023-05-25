@@ -8,23 +8,23 @@ On top of the base layer, this layer adds:
 
 | Component | Version | Notes |
 | -- | -- | -- |
-| Docker | 20.10.18 |
+| Docker | 20.10.24 |
 | DotNet | 6.0 |
 | gcc | 11 |
-| GitVersion | 5.10.3 |
-| GoLang | 1.19.1 |
-| GoSwagger | 0.30.3 |
-| Helm | 3.10.0 |
+| GitVersion | 5.12.0 |
+| GoLang | 1.20.4 |
+| GoSwagger | 0.30.4 |
+| Helm | 3.12.0 |
 | JDK | 11.0.12.7.1 |
 | JFrog | 2 |
 | kubectl | 1.22.15 |
-| Maven | 3.8.6 |
+| Maven | 3.9.2 |
 
 Additional GoLang Utilities
 | Utility | Version |
 | -- | -- |
 | gocover-cobertura| - | (not versioned) |
-| go-junit-report | 0.9.1 |
+| go-junit-report | 2.0.0 |
 
 
 ## Intended Use
