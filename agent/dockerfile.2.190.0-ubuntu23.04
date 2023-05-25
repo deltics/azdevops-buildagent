@@ -1,19 +1,16 @@
-FROM deltics/azdevops-buildagent:wakatipu
+ARG BASE_IMAGE=ubuntu23.04
+FROM deltics/azdevops-buildagent:$BASE_IMAGE
+
 ARG TARGETARCH=amd64
+ENV AGENT_VERSION=2.190.0
 
 # Set shell for RUN commands
 SHELL ["/bin/bash", "--login", "-c"]
-
-
-# Versions of software introduced in this image
-ENV AGENT_VERSION=2.170.1
-
 
 # To make it easier for build and release pipelines to run apt-get,
 # configure apt to not require confirmation (assume the -y argument by default)
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
-
 
 # Download and run the installer for a Debian based build agent of the required version
 WORKDIR /azp
@@ -27,8 +24,11 @@ RUN if [ "$TARGETARCH" = "amd64" ]; then \
 COPY ./start.sh .
 RUN chmod +x start.sh
 
-# Just to make absolutely sure that the Agent_ToolsDirectory is set correctly
-#  (the folder itself is created in the wakatipu base image)
+RUN mkdir -p /azp/_work/_tool
 ENV Agent_ToolsDirectory=/azp/_work/_tool
+
+# Disable Globalization Support in .net core, otherwise the 2.x Azure 
+# DevOps Agent is unable to startup on Ubuntu 23.04
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 
 ENTRYPOINT [ "./start.sh" ]

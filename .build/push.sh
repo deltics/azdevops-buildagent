@@ -1,15 +1,13 @@
 #!/bin/bash
 
 # Base images
-docker push deltics/azdevops-buildagent:os
-docker push deltics/azdevops-buildagent:wakatipu
+docker push deltics/azdevops-buildagent:ubuntu23.04
+docker push deltics/azdevops-buildagent:ubuntu23.04-wakatipu
 
 # "Empty" Build agent images (no tooling)
-docker push deltics/azdevops-buildagent:2.170.1
-docker push deltics/azdevops-buildagent:2.181.2
-docker push deltics/azdevops-buildagent:2.190.0
+docker push deltics/azdevops-buildagent:2.190.0-ubuntu23.04
+docker push deltics/azdevops-buildagent:3.225.0-ubuntu23.04
 
 # Wakatipu build agent images
-docker push deltics/azdevops-buildagent:2.170.1-wakatipu
-docker push deltics/azdevops-buildagent:2.181.2-wakatipu
-docker push deltics/azdevops-buildagent:2.190.0-wakatipu
+docker push deltics/azdevops-buildagent:2.190.0-ubuntu23.04-wakatipu
+docker push deltics/azdevops-buildagent:3.225.0-ubuntu23.04-wakatipu

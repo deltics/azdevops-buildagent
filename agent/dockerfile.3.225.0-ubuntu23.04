@@ -1,19 +1,16 @@
-FROM deltics/azdevops-buildagent:os
+ARG BASE_IMAGE=ubuntu23.04
+FROM deltics/azdevops-buildagent:$BASE_IMAGE
+
 ARG TARGETARCH=amd64
+ENV AGENT_VERSION=3.225.0
 
 # Set shell for RUN commands
 SHELL ["/bin/bash", "--login", "-c"]
-
-
-# Versions of software introduced in this image
-ENV AGENT_VERSION=2.170.1
-
 
 # To make it easier for build and release pipelines to run apt-get,
 # configure apt to not require confirmation (assume the -y argument by default)
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
-
 
 # Download and run the installer for a Debian based build agent of the required version
 WORKDIR /azp

@@ -1,32 +1,29 @@
 # Azure DevOps Build Agent
 
-A containerised, Linux-hosted build agent for Azure DevOps.
-
-The build agent in these images is of limited use since the image includes only a minimal runtime environment for the agent itself, including:
+A containerised, Linux-hosted build agent for Azure DevOps running on Ubuntu 23.04.  The build agent in these images is of limited use since the image includes only a minimal runtime environment for the agent itself, including:
 
 | Component | Version |
 | -- | -- |
-| git | 2.34.1 |
-| nvm | 0.39.1 |
-| node | 16.17.1 |
+| git | 2.39.2 |
+| nvm | 0.39.5 |
+| node | 18.18.0 |
 | Azure Cli | |
 
 Tagged images are provided for the following versions of the build agent:
 
-* 2.170.1
-* 2.181.2
+* 2.170.1 (deprecated)
+* 2.181.2 (deprecated)
 * 2.190.0
+* 3.225.0
 
-The image tag corresponds to the agent version, so the full identifier for the 2.190.0 image is:
+The image tag corresponds to the agent version and host os; the full identifier for the 2.190.0 image is:
 
-`deltics/azdevops-buildagent:2.190.0`
-
-Multiple agent versions are provided so that auto-downgrade (or upgrade) behaviour may be avoided by using images based on an appropriate build agent version, if that is an issue in your environment.
+`deltics/azdevops-buildagent:2.190.0-ubuntu23.04`
 
 
 ## Intended Use
 
-Although the image may be used to deploy a functioning build agent, the pipelines it could usefully run would be very limited due to the absence of tooling beyond git, node and nvm.
+Although the image may be used to deploy a functioning build agent the pipelines it could usefully run would be very limited due to the absence of tooling beyond git, node and nvm.
 
 The intended use is for these images to be used as the _base_ for further images, adding additional tools to support more useful pipelines.
 
